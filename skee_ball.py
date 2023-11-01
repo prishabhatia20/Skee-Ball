@@ -23,3 +23,7 @@ def main():
     view = View(model)
 
     view.draw_start_screen()
+
+
+if __name__ == "__main__":
+    main()
