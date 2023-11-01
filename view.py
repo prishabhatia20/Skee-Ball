@@ -11,6 +11,20 @@ class View:
     This class controls the visuals for the game
     """
 
+    # Set the width and height of the display window
+
+    frame_width = 600
+    frame_height = 400
+
+    # Create a display window using Pygame
+    world = pygame.display.set_mode([frame_width, frame_height])
+
+    # Load game background image
+    background = pygame.image.load(os.path.join("images", "background.PNG")).convert()
+
+    # Get width and height of background image
+    bg_width, bg_height = background.get_size()
+
     def __init__(self, model):
         """
         This method initializes an instance of the View class
@@ -20,32 +34,18 @@ class View:
             model: an instance of the Model class
         """
 
-        # Set the width and height of the screen
-        self.width = 600
-        self.height = 400
+        ### IMAGE STORING/LOADING CODE ###
 
         # Create a list that will store all of the number images
         self.numbers = []
+        self.start_screen = []
 
-        self.model = model
-
-        # Get the start screen image
-        self.start_screen = pygame.image.load(
-            os.path.join("images", "start_screen.PNG")
-        ).convert()
-        self.start_screen.convert_alpha()
-
-        # Get the main game screen image
-        self.main_screen = pygame.image.load(
-            os.path.join("images", "main_screen.PNG")
-        ).convert()
-        self.main_screen.convert_alpha()
-
-        # Get the end screen image
-        self.end_screen = pygame.image.load(
-            os.path.join("images", "end_screen.PNG")
-        ).convert()
-        self.end_screen.convert_alpha()
+        # Load all the start screen images
+        for i in range(1, 5):
+            image = pygame.image.load(
+                os.path.join("images", "start" + str(i) + ".png")
+            ).convert()
+            self.start_screen.append(image)
 
         # Get all the number images
         for i in range(0, 10):
@@ -61,14 +61,25 @@ class View:
         # Set image for ones place to be zero
         self.ones = self.numbers[0]
 
+        # Initialize model
+
+        self.model = model
+
     def draw_start_screen(self):
         """
         This method creates the start screen
         """
-        self.main_screen = pygame.display.set_mode((self.width, self.height))
-        self.main_screen.blit(self.start_screen, (0, 0))
 
-    def draw_score(self, score):
+        # Iterate through all start screen images
+        for i in enumerate(self.start_screen):
+            # Blit the ith image
+            self.world.blit(self.start_screen[i], (0, 0))
+            # Update display
+            pygame.display.flip()
+            # Delay the program by one second
+            pygame.time.delay(1000)
+
+    def draw_score(self):
         """
         This method takes in the score through model and accordingly
         updates the score on the screen
@@ -76,9 +87,23 @@ class View:
         Args:
             score: an integer representing the current player score
         """
-        string_score = str(score)
+        string_score = str(self.model.score)
+
+        # If the score is less than 100, blit the tens and ones place in a certain
+        # position
         if string_score > 100:
             tens = self.numbers[string_score[0]]
-        else:
+            self.world.blit(tens, (200, 300))
+            self.world.blit(self.ones, (400, 300))
+
+        ## If the score is greater than 100, blit the hundreds, tens, and ones
+        elif string_score <= 100:
             tens = self.numbers[string_score[1]]
             hundreds = self.numbers[string_score[0]]
+            self.world.blit(hundreds, (100, 300))
+            self.world.blit(tens, (200, 300))
+            self.world.blit(self.ones, (300, 300))
+
+        # Else, blit 0 in the middle
+        else:
+            self.world.blit(self.ones(300, 300))
