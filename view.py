@@ -13,17 +13,22 @@ class View:
 
     # Set the width and height of the display window
 
-    frame_width = 600
-    frame_height = 400
+    frame_width = 1950
+    frame_height = 1200
 
     # Create a display window using Pygame
     world = pygame.display.set_mode([frame_width, frame_height])
 
-    # Load game background image
-    background = pygame.image.load(os.path.join("images", "background.PNG")).convert()
+    # Load the score screen image
+    score_screen = pygame.image.load(
+        os.path.join("images", "score_screen.png")
+    ).convert()
 
-    # Get width and height of background image
-    bg_width, bg_height = background.get_size()
+    # # Load game background image
+    # background = pygame.image.load(os.path.join("images", "background.PNG")).convert()
+
+    # # Get width and height of background image
+    # bg_width, bg_height = background.get_size()
 
     def __init__(self, model):
         """
@@ -71,13 +76,24 @@ class View:
         """
 
         # Iterate through all start screen images
-        for i in enumerate(self.start_screen):
+        for i in range(0, 13):
             # Blit the ith image
-            self.world.blit(self.start_screen[i], (0, 0))
+            image = i % 4
+            self.world.blit(self.start_screen[image], (0, 0))
             # Update display
             pygame.display.flip()
             # Delay the program by one second
-            pygame.time.delay(1000)
+            pygame.time.delay(500)
+        self.world.blit(self.score_screen, (0, 0))
+        pygame.display.flip()
+        pygame.time.delay(4000)
+
+    # def draw_score_screen(self):
+    #     """
+    #     This method draws the score screen onto the pygame window
+    #     """
+    #     self.world.blit(self.score_screen, (0, 0))
+    #     pygame.display.flip()
 
     def draw_score(self):
         """
