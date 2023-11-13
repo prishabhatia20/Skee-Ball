@@ -5,6 +5,7 @@ Main file to run skee ball display
 import pygame
 from model import Model
 from view import View
+from parse_messages import parse_message
 
 
 def main():
@@ -23,6 +24,16 @@ def main():
     view = View(model)
 
     view.draw_start_screen()
+
+    while model.num_tries < 9:
+        ## Parse score
+        message = parse_message("/dev/ttyACM0", 9600, model)
+        ## Draw main game screen
+        ## Function to sense new inputs?
+        ## Update score
+        ## 
+
+
 
 
 if __name__ == "__main__":

@@ -32,12 +32,12 @@ class Model:
         self.active = True
         self.tries_left = 8
 
-    def update_score(self, parsed_sensor_val):
+    def update_score(self, incrementation_val):
         """
         This method updates the score when there is input from the IDE
         """
 
-        self.score += parsed_sensor_val
+        self.score += incrementation_val
 
     def update_tries(self):
         """
