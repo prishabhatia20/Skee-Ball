@@ -20,7 +20,7 @@ class View:
     world = pygame.display.set_mode([frame_width, frame_height])
 
     # Load the main screen image
-    score_screen = pygame.image.load(
+    main_screen = pygame.image.load(
         os.path.join("images", "main_screen.png")
     ).convert()
 

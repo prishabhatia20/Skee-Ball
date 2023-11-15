@@ -13,7 +13,7 @@ class Model:
 
     """
 
-    total_tries = 8
+    total_tries = 9
 
     def __init__(self):
         """
@@ -30,19 +30,21 @@ class Model:
         self.score = 0
         self.num_tries = 0
         self.active = True
-        self.tries_left = 8
+        self.tries_left = 9
 
     def update_score(self, incrementation_val):
         """
         This method updates the score when there is input from the IDE
         """
-        if incrementation_val > 0:
-            self.score += incrementation_val
-        else:
-            self.score = self.score
+        
+        self.score += incrementation_val
 
     def update_tries(self):
         """
         This method updates the number tries the user has left
         """
-        self.tries_left = self.total_tries - self.num_tries
+        self.tries_left -= 1
+        self.num_tries += 1
+    
+    def update_active(self):
+        self.active = False

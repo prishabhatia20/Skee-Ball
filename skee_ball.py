@@ -37,20 +37,20 @@ def main():
 
         ## Parse score
         message = parse_message("/dev/ttyACM0", 9600, model)
+        if message > 0:
 
-        # Send to model, update scores & tries
-        model.update_score(message)
-        model.update_tries()
-        view.draw_updated_score()
+            # Send to model, update scores & tries
+            model.update_score(message)
+            model.update_tries()
+            view.draw_updated_score()
 
-
-        ## Draw main game screen
-        ## Function to sense new inputs?
-        ## Update score
-        ## 
+ 
+            ## Draw main game screen
+            ## Function to sense new inputs?
+            ## Update score
+            ## 
     
     view.draw_end_screen()
-
 
 
 
