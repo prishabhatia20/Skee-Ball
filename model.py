@@ -36,8 +36,10 @@ class Model:
         """
         This method updates the score when there is input from the IDE
         """
-
-        self.score += incrementation_val
+        if incrementation_val > 0:
+            self.score += incrementation_val
+        else:
+            self.score = self.score
 
     def update_tries(self):
         """

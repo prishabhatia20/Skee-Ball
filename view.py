@@ -19,10 +19,18 @@ class View:
     # Create a display window using Pygame
     world = pygame.display.set_mode([frame_width, frame_height])
 
-    # Load the score screen image
+    # Load the main screen image
+    score_screen = pygame.image.load(
+        os.path.join("images", "main_screen.png")
+    ).convert()
+
+
+    # Load the final score screen image
     score_screen = pygame.image.load(
         os.path.join("images", "score_screen.png")
     ).convert()
+
+
 
     # # Load game background image
     # background = pygame.image.load(os.path.join("images", "background.PNG")).convert()
@@ -86,16 +94,19 @@ class View:
             pygame.time.delay(500)
         self.world.blit(self.score_screen, (0, 0))
         pygame.display.flip()
-        pygame.time.delay(4000)
 
-    # def draw_score_screen(self):
-    #     """
-    #     This method draws the score screen onto the pygame window
-    #     """
-    #     self.world.blit(self.score_screen, (0, 0))
-    #     pygame.display.flip()
+    def draw_main_screen(self):
+        """
+        This method draws the score screen onto the pygame window
+        """
+        self.world.blit(self.main_screen, (0, 0))
+        pygame.display.flip()
+    
+    def draw_score_screen(self):
+        self.world.blit(self.score_screen, (0, 0))
+        pygame.display.flip()
 
-    def draw_score(self):
+    def draw_updated_score(self):
         """
         This method takes in the score through model and accordingly
         updates the score on the screen

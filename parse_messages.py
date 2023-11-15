@@ -15,7 +15,7 @@ def parse_message(arduino_port, baud_rate, model):
     raw_data = arduino.readline().decode()
     data = raw_data.rstrip("\"")
 
-    for i in range(0, model.total_tries):
+    for i in range(0, len(scores)):
         if data[i] == 1:
             score += scores[i]
         else:
