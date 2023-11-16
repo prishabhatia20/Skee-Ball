@@ -1,24 +1,38 @@
 import serial
+import pandas as pd
 
 def parse_message(arduino_port, baud_rate):
-    scores = [100, 100, 50, 40, 30, 10, 0]
+    scores = [50, 40, 30, 20, 10]
     score = 0
 
     try:
         arduino = serial.Serial(arduino_port, baud_rate, timeout=1)
-    except:
-        print("Please check the port")
+    except Exception as e:
+        print("Error: {e}")
+        return score
 
-    raw_data = arduino.readline().decode()
-    data = raw_data.rstrip("\"")
+    # raw_data = arduino.readline().decode()
+    # data = raw_data.rstrip("\"")
 
-    for i in range(0, len(scores)):
-        if data[i] == 1:
-            score += scores[i]
-        else:
-            score += 0
+    raw_data = arduino.readline().decode().rstrip("\n")
+    data = list(map(int, raw_data))
+    print(data)
+
+    if len(data) == len(scores):
+        for i in range(len(scores)):
+            if data[i] == 1:
+                score += scores[i]
+
+
+
+    # for i in range(0, len(scores)):
+    #     if data[i] == 1:
+    #         score += scores[i]
+    #     else:
+    #         score += 0
     
     return score
+    
 
 
 def main():
@@ -31,10 +45,14 @@ def main():
         if message > 0:
             score += message
             print(f"YOUR SCORE: {score}")
+            num_tries += 1
         else:
-            score += message
-            print(f"YOU DID NOT SCORE")
-        num_tries += 1
+            print("NO SCORE")
+
     
     print(f"GAME OVER. FINAL SCORE: {score}")
+
+
+if __name__ == "__main__":
+    main()
 
