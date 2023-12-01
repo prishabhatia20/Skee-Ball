@@ -16,8 +16,10 @@ def parse_message(arduino_port, baud_rate):
         baud_rate: an integer representing the baud_rate
     
     Returns:
-        an integer representing how much to increment the score by
+        a String that is the message sent from the Arduino IDE
     """
+
+    num_sensors = 6
     scores = [100, 50, 40, 30, 10, 0]
     score = 0
 
@@ -28,26 +30,19 @@ def parse_message(arduino_port, baud_rate):
 
     raw_data = arduino.readline()
     string_data = raw_data.decode()
-    data = string_data[0: len(scores)]
+    data = string_data[0: num_sensors]
 
-    for i in range(0, len(scores)):
-        if data[i] == 1:
-            score += scores[i]
-        else:
-            score += 0
+    return data
+
+    # for i in range(0, len(scores)):
+    #     if data[i] == 1:
+    #         score += scores[i]
+    #     else:
+    #         score += 0
     
-    return score
+    # return score
 
 
 
 
 
-
-# if __name__ == "__main__":
-#     ser = serial.Serial("/dev/ttyACM0", 9600, timeout=1)
-#     ser.reset_input_buffer()
-
-#     while True:
-#         if ser.in_waiting > 0:
-#             line = ser.readline().decode("utf-8").rstrip()
-#             print(line)

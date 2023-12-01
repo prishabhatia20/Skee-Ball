@@ -12,6 +12,7 @@ class Model:
     the appropriate sprites.
 
     """
+    scores = [100, 50, 40, 30, 10, 0]
 
     total_tries = 9
 
@@ -21,8 +22,10 @@ class Model:
 
         Args:
             score: an integer representing the score of the player
+
             num_tries: an integer representing how many times the
             player has rolled & scored
+
             total_tries: an integer representing how many total tries
             the player has
 
@@ -32,12 +35,20 @@ class Model:
         self.active = True
         self.tries_left = 9
 
-    def update_score(self, incrementation_val):
+    def update_score(self, sensor_readings):
         """
         This method updates the score when there is input from the IDE
         """
-        
-        self.score += incrementation_val
+
+        incrementation_val = 0
+
+        for sensor in sensor_readings:
+            if sensor_readings[sensor] == 1:
+                incrementation_val += self.scores[sensor]
+
+        if incrementation_val > 0:
+            self.score += incrementation_val
+            self.update_tries()
 
     def update_tries(self):
         """
