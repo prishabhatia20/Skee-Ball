@@ -19,9 +19,10 @@ def parse_message(arduino_port, baud_rate):
         a String that is the message sent from the Arduino IDE
     """
 
-    num_sensors = 6
-    scores = [100, 50, 40, 30, 10, 0]
-    score = 0
+    # num_sensors = 6
+    # scores = [100, 50, 40, 30, 10, 0]
+    num_sensors = 2
+    # score = 0
 
     try:
         arduino = serial.Serial(arduino_port, baud_rate, timeout=1)
@@ -34,13 +35,7 @@ def parse_message(arduino_port, baud_rate):
 
     return data
 
-    # for i in range(0, len(scores)):
-    #     if data[i] == 1:
-    #         score += scores[i]
-    #     else:
-    #         score += 0
-    
-    # return score
+
 
 
 

@@ -12,7 +12,8 @@ class Model:
     the appropriate sprites.
 
     """
-    scores = [100, 50, 40, 30, 10, 0]
+    # scores = [100, 50, 40, 30, 10, 0]
+    scores = [100, 50]
 
     total_tries = 9
 
@@ -46,10 +47,7 @@ class Model:
             if sensor_readings[sensor] == 1:
                 incrementation_val += self.scores[sensor]
 
-        if incrementation_val > 0:
-            self.score += incrementation_val
-            self.update_tries()
-
+        self.score += incrementation_val
     def update_tries(self):
         """
         This method updates the number tries the user has left

@@ -3,6 +3,7 @@ Main file to run skee ball display
 """
 
 import pygame
+import sys
 from model import Model
 from view import View
 from parse_messages import parse_message
@@ -11,17 +12,20 @@ from pygame.locals import QUIT
 
 def main():
     """
-    Main function to run code. THis function calls all methods
+    Main function to run code. This function calls all methods
     necessary to display the images, update the score, and calls
     start and end screen methods
     """
 
+    serial_port = "/dev/ttyACM0"
+    baud_rate = 9600
     pygame.init()
 
     for event in pygame.event.get():
         if event.type == QUIT:
             # Quit the game if the user clicks the close button
-            pygame.quit()
+            # pygame.quit()
+            sys.exit()
 
     # Create an instance of Model
     model = Model()
@@ -36,19 +40,14 @@ def main():
         view.draw_main_screen()
 
         ## Parse score
-        message = parse_message("/dev/ttyACM0", 9600, model)
-        if message > 0:
+        message = parse_message(serial_port, baud_rate)
+        if message != "00":
 
             # Send to model, update scores & tries
             model.update_score(message)
             model.update_tries()
             view.draw_updated_score()
 
- 
-            ## Draw main game screen
-            ## Function to sense new inputs?
-            ## Update score
-            ## 
     
     view.draw_end_screen()
 

@@ -116,18 +116,17 @@ class View:
         """
         string_score = str(self.model.score)
 
-        # If the score is less than 100, blit the tens and ones place in a certain
-        # position
-        if string_score > 100:
-            tens = self.numbers[string_score[0]]
+        # If the score is greater or equal to 100
+        if self.model.score >= 100:
+            hundreds = self.numbers[string_score[0]]
+            tens = self.numbers[string_score[1]]
+            self.world.blit(hundreds, (100, 300))
             self.world.blit(tens, (200, 300))
             self.world.blit(self.ones, (400, 300))
 
-        ## If the score is greater than 100, blit the hundreds, tens, and ones
-        elif string_score <= 100:
-            tens = self.numbers[string_score[1]]
-            hundreds = self.numbers[string_score[0]]
-            self.world.blit(hundreds, (100, 300))
+        ## If the score is less than 100 but greater than 10
+        elif self.model.score < 100 and self.model.score >= 10:
+            tens = self.numbers[string_score[0]]
             self.world.blit(tens, (200, 300))
             self.world.blit(self.ones, (300, 300))
 
