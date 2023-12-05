@@ -3,9 +3,9 @@ File containing parse messages function
 """
 import serial
 
-from model import Model
+# from model import Model
 
-def parse_message(arduino_port, baud_rate):
+def parse_message(arduino_port, baud_rate, serial_object):
     """
     Return what the player most recently scored
 
@@ -24,17 +24,12 @@ def parse_message(arduino_port, baud_rate):
     num_sensors = 2
     # score = 0
 
-    try:
-        arduino = serial.Serial(arduino_port, baud_rate, timeout=1)
-    except:
-        print("Please check the port and baud rate")
-
-    raw_data = arduino.readline()
+    raw_data = serial_object.readline()
     string_data = raw_data.decode()
     data = string_data[0: num_sensors]
+    print(f"Parse messages Data: {data}")
 
     return data
-
 
 
 

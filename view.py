@@ -118,18 +118,24 @@ class View:
 
         # If the score is greater or equal to 100
         if self.model.score >= 100:
-            hundreds = self.numbers[string_score[0]]
-            tens = self.numbers[string_score[1]]
+            hundreds = self.numbers[int(string_score[0])]
+            tens = self.numbers[int(string_score[1])]
             self.world.blit(hundreds, (100, 300))
             self.world.blit(tens, (200, 300))
             self.world.blit(self.ones, (400, 300))
+            pygame.display.update()
 
         ## If the score is less than 100 but greater than 10
         elif self.model.score < 100 and self.model.score >= 10:
-            tens = self.numbers[string_score[0]]
+            tens = self.numbers[int(string_score[0])]
             self.world.blit(tens, (200, 300))
             self.world.blit(self.ones, (300, 300))
+            pygame.display.update()
 
         # Else, blit 0 in the middle
         else:
-            self.world.blit(self.ones(300, 300))
+            self.world.blit(self.ones, (300, 300))
+            pygame.display.update()
+        
+    def draw_tries(self):
+        self.world.blit(self.numbers[self.model.num_tries], (1300, 1000))

@@ -1,37 +1,59 @@
 import serial
 import pandas as pd
-
+from parse_messages import *
 # def parse_message(arduino_port, baud_rate):
 #     # scores = [50, 40, 30, 20, 10]
 #     scores = [50, 40]
 #     score = 0
 
+
+arduino_port = "/dev/ttyACM0"
+baud_rate = 9600
+
+try:
+        arduino = serial.Serial(arduino_port, baud_rate, timeout=0.5)
+except:
+        print("Please check the port and baud rate")
+
+
 while True:
 
-    arduino_port = "/dev/ttyACM0"
-    baud_rate = 9600
 
     # try:
-    arduino = serial.Serial(arduino_port, baud_rate, timeout=1)
-    # except Exception as e:
-    #     print("Error: {e}")
-    #     # return score
+    # arduino = serial.Serial(arduino_port, baud_rate, timeout=1)
+    # # except Exception as e:
+    # #     print("Error: {e}")
+    # #     # return score
 
-    # print("test")
-    # raw_data = arduino.readline().decode()
-    # data = raw_data.rstrip("\"")
+    # # print("test")
+    # # raw_data = arduino.readline().decode()
+    # # data = raw_data.rstrip("\"")
 
-    # if arduino.in_waiting > 0:
-    # raw_data = arduino.readline().decode()
-    raw_data = arduino.readline()
-    # print(f"Raw data: {raw_data}")
-    string_data = raw_data.decode()
-    print(f"String data: {string_data}")
-    filtered_data = string_data[0:2]
-    print(f"Filtered data: {filtered_data}")
-    # data = string_data[2]
-    # print(data)
+    # # if arduino.in_waiting > 0:
+    # # raw_data = arduino.readline().decode()
+    # raw_data = arduino.readline()
+    # # print(f"Raw data: {raw_data}")
+    # string_data = raw_data.decode()
+    # print(f"String data: {string_data}")
+    # filtered_data = string_data[0:2]
+    # print(f"Filtered data: {filtered_data}")
+    # # data = string_data[2]
+    # # print(data)
+
+    num_sensors = 2
+    # score = 0
+
+
+    message = parse_message(arduino_port, baud_rate)
+    print(f"From parse messages: {message}")
+
+    # raw_data = arduino.readline()
+    # # string_data = raw_data.decode()
+    # data = raw_data[0: num_sensors]
+    # print(f"Data: {data}")
     
+
+   
         # print(f"Message: {raw_data}")
     # data = list(map(int, raw_data))
     # print(data)

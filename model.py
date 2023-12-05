@@ -43,11 +43,12 @@ class Model:
 
         incrementation_val = 0
 
-        for sensor in sensor_readings:
-            if sensor_readings[sensor] == 1:
+        for sensor in range(len(sensor_readings)):
+            if sensor_readings[sensor] == "1":
                 incrementation_val += self.scores[sensor]
 
         self.score += incrementation_val
+        print(f"Score: {self.score}")
     def update_tries(self):
         """
         This method updates the number tries the user has left
@@ -56,4 +57,7 @@ class Model:
         self.num_tries += 1
     
     def update_active(self):
-        self.active = False
+        if self.num_tries == self.total_tries:
+            self.active = False
+        
+        self.active = True
