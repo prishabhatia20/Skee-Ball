@@ -20,7 +20,6 @@ def parse_message(arduino_port, baud_rate, serial_object):
     """
 
     # num_sensors = 6
-    # scores = [100, 50, 40, 30, 10, 0]
     num_sensors = 2
     # score = 0
 

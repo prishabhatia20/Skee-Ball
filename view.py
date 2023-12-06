@@ -16,6 +16,8 @@ class View:
     frame_width = 1950
     frame_height = 1200
 
+    mid_height = 400
+    mid_width = 900
     # Create a display window using Pygame
     world = pygame.display.set_mode([frame_width, frame_height])
 
@@ -24,19 +26,17 @@ class View:
         os.path.join("images", "main_screen.png")
     ).convert()
 
+    original_main_screen = pygame.image.load(
+        os.path.join("images", "main_screen.png")
+    ).convert()
+
+
 
     # Load the final score screen image
     score_screen = pygame.image.load(
         os.path.join("images", "score_screen.png")
     ).convert()
 
-
-
-    # # Load game background image
-    # background = pygame.image.load(os.path.join("images", "background.PNG")).convert()
-
-    # # Get width and height of background image
-    # bg_width, bg_height = background.get_size()
 
     def __init__(self, model):
         """
@@ -114,28 +114,33 @@ class View:
         Args:
             score: an integer representing the current player score
         """
+
+        # Blit the original main screen image on so that the numbers are not stacking
+        # on top of each other 
+        self.main_screen.blit(self.original_main_screen, (0, 0))
+
         string_score = str(self.model.score)
 
         # If the score is greater or equal to 100
         if self.model.score >= 100:
             hundreds = self.numbers[int(string_score[0])]
             tens = self.numbers[int(string_score[1])]
-            self.world.blit(hundreds, (100, 300))
-            self.world.blit(tens, (200, 300))
-            self.world.blit(self.ones, (400, 300))
+            self.main_screen.blit(hundreds, ((self.mid_width - 100), self.mid_height))
+            self.main_screen.blit(tens, (self.mid_width, self.mid_height))
+            self.main_screen.blit(self.ones, ((self.mid_width + 100), self.mid_height))
             pygame.display.update()
 
         ## If the score is less than 100 but greater than 10
         elif self.model.score < 100 and self.model.score >= 10:
             tens = self.numbers[int(string_score[0])]
-            self.world.blit(tens, (200, 300))
-            self.world.blit(self.ones, (300, 300))
+            self.main_screen.blit(tens, ((self.mid_width - 75), self.mid_height))
+            self.main_screen.blit(self.ones, ((self.mid_width + 75), self.mid_height))
             pygame.display.update()
 
         # Else, blit 0 in the middle
         else:
-            self.world.blit(self.ones, (300, 300))
+            self.main_screen.blit(self.ones, (self.mid_width, self.mid_height))
             pygame.display.update()
         
     def draw_tries(self):
-        self.world.blit(self.numbers[self.model.num_tries], (1300, 1000))
+        self.main_screen.blit(self.numbers[self.model.tries_left], (1725, 40))

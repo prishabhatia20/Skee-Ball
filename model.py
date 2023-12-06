@@ -49,6 +49,7 @@ class Model:
 
         self.score += incrementation_val
         print(f"Score: {self.score}")
+        
     def update_tries(self):
         """
         This method updates the number tries the user has left
@@ -57,7 +58,7 @@ class Model:
         self.num_tries += 1
     
     def update_active(self):
-        if self.num_tries == self.total_tries:
+        if self.tries_left == 0:
             self.active = False
         
         self.active = True

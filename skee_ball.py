@@ -32,7 +32,6 @@ def main():
         if event.type == pygame.QUIT:
             # Quit the game if the user clicks the close button
             pygame.quit()
-            # sys.exit()
 
     # Create an instance of Model
     model = Model()
@@ -41,6 +40,8 @@ def main():
     view = View(model)
 
     view.draw_start_screen()
+    
+    clock = pygame.time.Clock()
 
     while model.active:
 
@@ -48,14 +49,12 @@ def main():
             if event.type == pygame.QUIT:
                 # Quit the game if the user clicks the close button
                 pygame.quit()
-                # sys.exit()
         # Draw main game screen
         view.draw_main_screen()
 
         if model.num_tries == 0:
             view.draw_updated_score()
             view.draw_tries()
-            # print(f"num_tries: {model.num_tries}")
 
         ## Parse score
         message = parse_message(serial_port, baud_rate, arduino)
@@ -67,12 +66,17 @@ def main():
             model.update_tries()
             view.draw_updated_score()
             view.draw_tries()
+            model.update_active()
+
+        pygame.display.flip()
         
-        model.update_active()
+        # pygame.display.update()
+        clock.tick(60)
         
 
     
     view.draw_end_screen()
+    pygame.display.update()
 
 
 
