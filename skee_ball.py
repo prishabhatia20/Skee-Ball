@@ -28,11 +28,6 @@ def main():
 
     pygame.init()
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            # Quit the game if the user clicks the close button
-            pygame.quit()
-
     # Create an instance of Model
     model = Model()
 
@@ -74,8 +69,8 @@ def main():
         clock.tick(60)
         
 
-    
-    view.draw_end_screen()
+        
+    view.draw_score_screen()
     pygame.display.update()
 
 
