@@ -69,7 +69,7 @@ class View:
         # Load all the small number images
         for i in range(0, 10):
             image = pygame.image.load(
-                os.path.join("images", "number" + str(i) + ".png")
+                os.path.join("images", "small_" + str(i) + ".png")
             ).convert()
             image.convert_alpha()
 
@@ -164,5 +164,5 @@ class View:
             pygame.display.update()
         
     def draw_tries(self):
-        self.main_screen.blit(self.small_numbers[self.model.tries_left], (1725, 40))
+        self.main_screen.blit(self.small_numbers[self.model.tries_left], (1735, 45))
  
