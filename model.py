@@ -12,8 +12,8 @@ class Model:
     the appropriate sprites.
 
     """
-    # scores = [100, 50, 40, 30, 10, 0]
-    scores = [100, 50]
+    # scores = [0, 10, 20, 40, 50, 100]
+    scores = [100, 50, 20, 10]
 
     total_tries = 9
 
@@ -39,6 +39,9 @@ class Model:
     def update_score(self, sensor_readings):
         """
         This method updates the score when there is input from the IDE
+
+        Args:
+            sensor_readings: a String representing sensor readings
         """
 
         incrementation_val = 0
@@ -58,7 +61,10 @@ class Model:
         self.num_tries += 1
     
     def update_active(self):
+        """
+        This method updates whether the game is still active -- if
+        the user has zero tries left the game is not active
+        """
         if self.tries_left == 0:
             self.active = False
         
-        self.active = True

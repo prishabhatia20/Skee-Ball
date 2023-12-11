@@ -57,6 +57,8 @@ class View:
         # Create a list that will store all of the number images
         self.small_numbers = []
         self.big_numbers = []
+
+        # Create a list that stores the start screen images
         self.start_screen = []
 
         # Load all the start screen images
@@ -120,16 +122,49 @@ class View:
         pygame.display.flip()
     
     def draw_score_screen(self):
+        """
+        This method draws the background for the final score screen
+        """
         self.world.blit(self.score_screen, (0, 0))
         pygame.display.flip()
+
+    def draw_final_score(self):
+        """
+        This method parses the last score and blits it onto score_screen
+        """
+
+        string_score = str(self.model.score)
+
+        # If the score is greater or equal to 100
+        if self.model.score >= 100:
+            hundreds = self.big_numbers[int(string_score[0])]
+            tens = self.big_numbers[int(string_score[1])]
+
+            self.score_screen.blit(hundreds, ((self.mid_width - 300), self.mid_height))
+            self.score_screen.blit(tens, (self.mid_width, self.mid_height))
+            self.score_screen.blit(self.big_zero, ((self.mid_width + 300), self.mid_height))
+
+            pygame.display.update()
+
+        ## If the score is less than 100 but greater than 10
+        elif self.model.score < 100 and self.model.score >= 10:
+            tens = self.big_numbers[int(string_score[0])]
+
+            self.score_screen.blit(tens, ((self.mid_width - 150), self.mid_height))
+            self.score_screen.blit(self.big_zero, ((self.mid_width + 150), self.mid_height))
+
+            pygame.display.update()
+
+        # Else, blit 0 in the middle
+        else:
+            self.score_screen.blit(self.big_zero, (self.mid_width, self.mid_height))
+            pygame.display.update()
+
 
     def draw_updated_score(self):
         """
         This method takes in the score through model and accordingly
         updates the score on the screen
-
-        Args:
-            score: an integer representing the current player score
         """
 
         # Blit the original main screen image on so that the numbers are not stacking
@@ -164,5 +199,8 @@ class View:
             pygame.display.update()
         
     def draw_tries(self):
+        """
+        This method draws the tries the user has left
+        """
         self.main_screen.blit(self.small_numbers[self.model.tries_left], (1735, 45))
  
