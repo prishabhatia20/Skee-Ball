@@ -27,9 +27,12 @@ def main():
 
 
         pygame.init()
+        
 
         # Create an instance of Model
         model = Model()
+        scoore = model.get_score()
+        print(f"Beginning loop score: {scoore}")
 
         # Create an instance of View
         view = View(model)
@@ -45,15 +48,16 @@ def main():
                     # Quit the game if the user clicks the close button
                     pygame.quit()
             # Draw main game screen
-            view.draw_main_screen()
 
             if model.num_tries == 0:
                 view.draw_updated_score()
                 view.draw_tries()
+                model.score = 0
+
+            view.draw_main_screen()
 
             ## Parse score
             message = parse_message(serial_port, baud_rate, arduino)
-            print(f"Message: {message}")
             if "1" in message:
 
                 # Send to model, update scores & tries
@@ -61,22 +65,19 @@ def main():
                 model.update_tries()
                 view.draw_updated_score()
                 view.draw_tries()
-                # model.update_active()
 
             pygame.display.flip()
             
-            # pygame.display.update()
             clock.tick(60)
         
             if model.tries_left == 0:
-                view.draw_score_screen()
+                pygame.time.delay(500)
                 view.draw_final_score()
+                view.draw_score_screen()
+                model.update_active()
                 pygame.time.delay(4000)
 
             
-
-            
-        pygame.display.update()
 
 
 

@@ -12,8 +12,7 @@ class Model:
     the appropriate sprites.
 
     """
-    # scores = [0, 10, 20, 40, 50, 100]
-    scores = [100, 50, 20, 10]
+    scores = [100, 50, 30, 20, 10, 0]
 
     total_tries = 9
 
@@ -67,4 +66,6 @@ class Model:
         """
         if self.tries_left == 0:
             self.active = False
-        
+    
+    def get_score(self):
+        return self.score

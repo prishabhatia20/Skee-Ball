@@ -19,14 +19,12 @@ def parse_message(arduino_port, baud_rate, serial_object):
         a String that is the message sent from the Arduino IDE
     """
 
-    # num_sensors = 6
-    num_sensors = 4
+    num_sensors = 6
 
     # Read and parse serial data
     raw_data = serial_object.readline()
     string_data = raw_data.decode()
     data = string_data[0: num_sensors]
-    print(f"Parse messages Data: {data}")
 
     return data
 

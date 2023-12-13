@@ -3,7 +3,7 @@ File containing View class
 """
 import os
 import pygame
-from model import Model
+# from model import Model
 
 
 class View:
@@ -42,6 +42,11 @@ class View:
         os.path.join("images", "score_screen.png")
     ).convert()
 
+    # Load the final score screen image
+    original_score_screen = pygame.image.load(
+        os.path.join("images", "score_screen.png")
+    ).convert()
+
 
     def __init__(self, model):
         """
@@ -51,7 +56,7 @@ class View:
             self: an instance of the class
             model: an instance of the Model class
         """
-
+        
         ### IMAGE STORING/LOADING CODE ###
 
         # Create a list that will store all of the number images
@@ -133,6 +138,10 @@ class View:
         This method parses the last score and blits it onto score_screen
         """
 
+        # Blit the original score screen image on so that the numbers are not stacking
+        # on top of each other 
+        self.score_screen.blit(self.original_score_screen, (0, 0))
+
         string_score = str(self.model.score)
 
         # If the score is greater or equal to 100
@@ -159,6 +168,7 @@ class View:
         else:
             self.score_screen.blit(self.big_zero, (self.mid_width, self.mid_height))
             pygame.display.update()
+
 
 
     def draw_updated_score(self):
