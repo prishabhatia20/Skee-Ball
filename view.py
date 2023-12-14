@@ -26,25 +26,25 @@ class View:
 
     # Load the main screen image
     main_screen = pygame.image.load(
-        os.path.join("images", "main_screen.png")
+        os.path.join("images", "main_screen.PNG")
     ).convert()
 
 
     # Load a copy of main screen in order to be able to refresh the screen
     original_main_screen = pygame.image.load(
-        os.path.join("images", "main_screen.png")
+        os.path.join("images", "main_screen.PNG")
     ).convert()
 
 
 
     # Load the final score screen image
     score_screen = pygame.image.load(
-        os.path.join("images", "score_screen.png")
+        os.path.join("images", "score_screen.PNG")
     ).convert()
 
     # Load the final score screen image
     original_score_screen = pygame.image.load(
-        os.path.join("images", "score_screen.png")
+        os.path.join("images", "score_screen.PNG")
     ).convert()
 
 
@@ -69,7 +69,7 @@ class View:
         # Load all the start screen images
         for i in range(1, 5):
             image = pygame.image.load(
-                os.path.join("images", "start" + str(i) + ".png")
+                os.path.join("images", "start_" + str(i) + ".PNG")
             ).convert()
             self.start_screen.append(image)
 
