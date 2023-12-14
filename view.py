@@ -212,5 +212,5 @@ class View:
         """
         This method draws the tries the user has left
         """
-        self.main_screen.blit(self.small_numbers[self.model.tries_left], (1735, 45))
+        self.main_screen.blit(self.small_numbers[self.model.tries_left], (1280, 20))
  
