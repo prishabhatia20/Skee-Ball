@@ -12,7 +12,7 @@ int zero = A5;
 #define in3 4
 #define in4 5
 
-int sensorThreshold = 200;
+int sensorThreshold = 100;
 
 // Define motorRunTime variable
 int motorRunTime = 3500;
@@ -146,8 +146,6 @@ void processState() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-
   // Read sensor values
   readSensors();
 
@@ -162,6 +160,7 @@ void loop() {
       data += sensorVals[i];
     }
     Serial.print(data);
+    // Spin motors when sensor goes off
     spinMotors();
   }
 
