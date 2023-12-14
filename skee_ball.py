@@ -57,7 +57,7 @@ def main():
             view.draw_main_screen()
 
             ## Parse score
-            message = parse_message(serial_port, baud_rate, arduino)
+            message = parse_message(arduino)
             if "1" in message:
 
                 # Send to model, update scores & tries
