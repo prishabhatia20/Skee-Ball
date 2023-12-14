@@ -75,7 +75,7 @@ def main():
                 view.draw_final_score()
                 view.draw_score_screen()
                 model.update_active()
-                pygame.time.delay(4000)
+                pygame.time.delay(8000)
 
             
 
