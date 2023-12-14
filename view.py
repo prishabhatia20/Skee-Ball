@@ -13,12 +13,12 @@ class View:
 
     # Set the width and height of the display window
 
-    frame_width = 1950
-    frame_height = 1200
+    frame_width = 1370
+    frame_height = 1250
 
     # (0, 0) is in the top left corner of the window
-    mid_height = 350
-    mid_width = 825
+    mid_height = 250
+    mid_width = 550
 
 
     # Create a display window using Pygame
