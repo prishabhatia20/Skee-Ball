@@ -20,12 +20,19 @@ void setup() {
   digitalWrite(in2, HIGH);
   digitalWrite(in3, LOW);
   digitalWrite(in4, HIGH);
+  analogWrite(enA, 250); // Send PWM signal to L298N Enable pin
+  analogWrite(enB, 250); // Send PWM signal to L298N Enable pin
+
 }
 
 void loop() {
   
+  // Set initial rotation direction
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, HIGH);
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, HIGH);
   analogWrite(enA, 250); // Send PWM signal to L298N Enable pin
   analogWrite(enB, 250); // Send PWM signal to L298N Enable pin
-
   
 }
