@@ -13,6 +13,9 @@ the Arduino, the IDE window must be closed, and then the Python script should
 be run. If the IDE window and the Python window are both open, serial communication
 will not work. 
 
+This means that when running the game, first run the code in the Arduino IDE, close
+out of it, and then run the Python script.
+
 ## Installation Instructions
 In order to play the game, run the following:
 ```pip install -r requirements.txt```
