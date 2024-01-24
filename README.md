@@ -20,7 +20,7 @@ out of it, and then run the Python script.
 In order to play the game, run the following:
 ```pip install -r requirements.txt```
 Make sure to copy the
-Arduino code into the Arduino IDE. After that, clone this repository, run the
+Arduino code into the Arduino IDE. After that, run the
 skee_ball.py file and enjoy!
 
 Have fun!
