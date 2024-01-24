@@ -14,7 +14,9 @@ be run. If the IDE window and the Python window are both open, serial communicat
 will not work. 
 
 ## Installation Instructions
-In order to play the game, run pip install -r requirements.txt. Make sure to copy the
+In order to play the game, run the following:
+```pip install -r requirements.txt```
+Make sure to copy the
 Arduino code into the Arduino IDE. After that, clone this repository, run the
 skee_ball.py file and enjoy!
 
